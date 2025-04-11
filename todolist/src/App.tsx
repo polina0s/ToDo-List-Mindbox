@@ -1,6 +1,6 @@
 import './App.css'
 import Typography from '@mui/material/Typography';
-import { TaskList } from './components/taskList/taskList';
+import { TaskList } from './containers/TaskList/TaskList';
 
 function App() {
 
