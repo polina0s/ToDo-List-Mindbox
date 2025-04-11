@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
 import styles from './Filter.module.css'
-import { brown } from '@mui/material/colors';
 
 export function Filter () {
     return (

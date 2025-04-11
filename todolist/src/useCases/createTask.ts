@@ -1,6 +1,6 @@
 import { Task } from "../entities";
 
-export function createTask (name: string): Task {
+export function createTask ({name}: {name: string}): Task {
     const task: Task = {
         name: name,
         status: 'Active',
