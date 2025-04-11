@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Box, Collapse, List, ListItemButton, ListItemText } from '@mui/material';
+import { Box,  Collapse, List, ListItemButton, ListItemText, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import styles from './TaskList.module.css'
+import { Filter } from '../../components/Filter';
 
 
 
@@ -28,6 +29,7 @@ export function TaskList () {
 
             </List>
         </Collapse>   
+        <Filter/>
         </Box>
       </>
     )
