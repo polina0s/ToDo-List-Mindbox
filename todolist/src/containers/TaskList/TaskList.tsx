@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box, FormGroup, InputBase} from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import styles from './TaskList.module.css'
@@ -11,21 +11,12 @@ import { taskStorage } from '../../lib';
 
 
 export function TaskList () {
-  const [tasks, setTasks] = useState<TaskInterface[]>([])
+  const [tasks, setTasks] = useState<TaskInterface[]>(taskStorage.getTasks())
   const input = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const savedTasks = taskStorage.getTasks();
-    setTasks(savedTasks);
-  }, [])
-
-  useEffect(() => {
-    taskStorage.saveTasks(tasks);
-  }, [tasks]);
-
   const createNewTask = ({name}: {name: string}) => {
-    const task = createTask({name: name})
-    setTasks((old) => [...old, task])
+    const task = createTask({name: name});
+    setTasks((old) => taskStorage.setTasks([...old, task]));
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
