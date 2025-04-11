@@ -1,1 +1,1 @@
-export type {TaskInterface} from './Task'
+export type {ITask} from './Task'

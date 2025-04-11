@@ -1,5 +1,5 @@
-export interface TaskInterface {
+export interface ITask {
     name: string;
-    status: boolean;
+    status: "active" | "completed";
     id: number;
 }

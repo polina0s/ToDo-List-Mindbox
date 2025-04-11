@@ -1,17 +1,18 @@
 import { useRef, useState } from 'react';
-import { Box, FormGroup, InputBase} from '@mui/material';
+import { Box, Button, FormGroup, InputBase, Typography} from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import styles from './TaskList.module.css'
-import { Filter } from '../../components/Filter';
+import { Footer } from '../../components/Footer';
 import { Task } from '../../components/Task';
-import { createTask } from '../../useCases';
-import { TaskInterface } from '../../entities';
+import { changeTaskStatus, createTask, deleteCompletedTasks } from '../../useCases';
+import { ITask } from '../../entities';
 import { taskStorage } from '../../lib';
 
 
 
 export function TaskList () {
-  const [tasks, setTasks] = useState<TaskInterface[]>(taskStorage.getTasks())
+  const [tasks, setTasks] = useState<ITask[]>(taskStorage.getTasks())
+
   const input = useRef<HTMLInputElement>(null);
 
   const createNewTask = ({name}: {name: string}) => {
@@ -27,19 +28,43 @@ export function TaskList () {
             input.current!.value = '';
         }
     }
-};
+  };
+
+  const clearCompletedTasks = () => {
+    const activeTasks = deleteCompletedTasks(tasks);
+    taskStorage.setTasks(activeTasks);
+    setTasks(activeTasks);
+  } 
+
+  const handleChangeTaskStatus = (task: ITask) => {
+    const changedTask = changeTaskStatus(task);
+    const newList = tasks.map((el) => el.id === task.id ? (el = changedTask) : el)
+    console.log(newList)
+    setTasks(newList);
+    taskStorage.setTasks(newList)
+  }
 
   return (
     <>
       <Box className={styles.container}>
         <Box className={styles.input}>
           <ExpandMore />
-          <InputBase inputRef={input} onKeyDown={handleKeyDown} id='input' sx={{ ml: 1, flex: 1 }} placeholder="What needs to be done?" inputProps={{ 'aria-label': 'search google maps' }}/>
+          <InputBase inputRef={input} onKeyDown={handleKeyDown} id='input' sx={{ ml: 1, flex: 1 }} placeholder="What needs to be done?" />
         </Box>
           <FormGroup>
-            {tasks.map(({name, id}) => <Task status={false} name={name} id={id} key={id}/>)}
+            {tasks.map(({name, status, id}) => <Task handleChangeStatus={() => handleChangeTaskStatus({name, status, id})} status={status} name={name} id={id} key={id}/>)}
           </FormGroup>        
-        <Filter quantity={tasks.length}/>
+        <Footer 
+          Quantity={<Typography>{tasks.length} {tasks.length === 1 ? 'item' : 'items'} left</Typography>}
+       Filter={
+        <Box>
+        <Button variant='outlined' size='medium' color='warning'>All</Button>
+        <Button size='medium' color='warning'>Active</Button>
+        <Button size='medium' color='warning'>Completed</Button>
+    </Box> 
+       }
+       ClearButton={<Button size='medium' color='warning' onClick={clearCompletedTasks}>Clear completed</Button>}
+        />
         </Box>
       </>
   )

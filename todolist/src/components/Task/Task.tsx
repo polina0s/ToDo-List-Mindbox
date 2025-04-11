@@ -1,19 +1,21 @@
 import { Box, Checkbox, FormControlLabel, List } from '@mui/material';
-import { TaskInterface } from '../../entities';
-import { useState } from 'react';
 import styles from './Task.module.css'
+import { ITask } from '../../entities';
 
-export function Task ({name, status, id}: TaskInterface) {
-    const [checked, setChecked] = useState(status);
+interface TaskProps {
+    name: string;
+    status: 'active' | 'completed';
+    id: number;
+    handleChangeStatus: (task: ITask) => void;
+}
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
-    };
+export function Task ({name, status = 'active', id, handleChangeStatus}: TaskProps) {
+    const checked = status === 'completed';
 
     return (
         <Box className={styles.container} id={id.toString()}>
             <List component="div" disablePadding sx={{padding: '8px 16px'}}>
-                <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange}/>} label={name} />
+                <FormControlLabel control={<Checkbox checked={checked} onChange={() => handleChangeStatus({name, status, id})} color='success'/>} label={name} />
             </List>
         </Box>
     )

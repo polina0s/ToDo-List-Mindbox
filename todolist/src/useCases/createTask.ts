@@ -1,9 +1,9 @@
-import { TaskInterface } from "../entities";
+import { ITask } from "../entities";
 
-export function createTask ({name}: {name: string}): TaskInterface {
-    const task: TaskInterface = {
+export function createTask ({name}: {name: string}): ITask {
+    const task: ITask = {
         name: name,
-        status: false,
+        status: 'active',
         id: Date.now(),
     } 
 
