@@ -1,10 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
 import styles from './Filter.module.css'
 
-export function Filter () {
+export function Filter ({quantity}: {quantity: number}) {
     return (
         <Box className={styles.container}>
-            <Typography>0 items left</Typography>
+            <Typography>{quantity} {quantity === 1 ? 'item' : 'items'} left</Typography>
             
             <Box>
                 <Button variant='outlined' size='medium' color='warning'>All</Button>
