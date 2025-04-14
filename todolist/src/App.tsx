@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Typography from '@mui/material/Typography';
+import { TaskList } from './containers/TaskList';
+import { Box } from '@mui/material';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-      <h1>todos</h1>
-      </div>
+      <Box sx={{textAlign: 'center'}}>
+        <Typography variant="h1">
+          Todos
+        </Typography>
+      </Box>
+        <TaskList/>
     </>
   )
 }
