@@ -1,6 +1,7 @@
-import { describe, vi } from "vitest";
-import {render, screen} from '@testing-library/react'
+import { vi } from "vitest";
+import {screen} from '@testing-library/react'
 import { Task } from "./Task";
+import { customRender as render } from "../../utils/test-utils";
 
 describe('test Task component', () => {
     it('should render an active Task',  () => {
