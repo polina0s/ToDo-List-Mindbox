@@ -1,18 +1,14 @@
 import './App.css'
-import Typography from '@mui/material/Typography';
-import { TaskList } from './containers/TaskList';
-import { Box } from '@mui/material';
+import { StyledEngineProvider } from '@mui/material/styles';
+import { TasksPage } from './components/pages';
 
 function App() {
 
   return (
     <>
-      <Box sx={{textAlign: 'center'}}>
-        <Typography variant="h1">
-          Todos
-        </Typography>
-      </Box>
-        <TaskList/>
+    <StyledEngineProvider injectFirst>
+        <TasksPage/>
+    </StyledEngineProvider>
     </>
   )
 }
