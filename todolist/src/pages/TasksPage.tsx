@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { TaskList } from '../../containers/TaskList';
+import { TaskList } from '../containers/TaskList';
 
 export function TasksPage () {
     return (

@@ -1,5 +1,5 @@
 import { StyledEngineProvider } from '@mui/material/styles';
-import { TasksPage } from './components/pages';
+import { TasksPage } from './pages';
 
 function App() {
 
