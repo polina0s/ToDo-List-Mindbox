@@ -1,4 +1,3 @@
-import './App.css'
 import { StyledEngineProvider } from '@mui/material/styles';
 import { TasksPage } from './components/pages';
 

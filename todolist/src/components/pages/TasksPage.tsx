@@ -1,4 +1,3 @@
-import './App.css'
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import { TaskList } from '../../containers/TaskList';
